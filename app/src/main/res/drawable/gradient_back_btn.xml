@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="10"
+                android:startColor="#B16D7A"
+                android:centerColor="#DC988F"
+                android:endColor="#F6B692"
+                />
+            <corners android:radius="10dp"/>
+        </shape>
+
+    </item>
+    <item
+        android:drawable="@drawable/ic_back_foreground"
+        android:top="7dp"
+        android:bottom="7dp"
+        android:start="7dp"
+        android:end="7dp"
+        />
+</layer-list>

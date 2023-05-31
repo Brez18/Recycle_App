@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.Recycle_App" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#185a37</item>
+        <item name="colorPrimary">#FFF6D9</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -14,5 +14,12 @@
         <!-- Customize your theme here. -->
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
+    <style name="Floating" parent="Widget.Design.FloatingActionButton">
+        <item name="android:foreground">@drawable/gradient_back_btn</item>
+    </style>
+    <style name="ActiveColor" parent="Widget.Material3.NavigationRailView">
+        <item name="android:backgroundTint">#FAB9B6</item>
     </style>
 </resources>
