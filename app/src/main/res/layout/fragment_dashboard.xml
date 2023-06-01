@@ -141,7 +141,26 @@
                 android:layout_marginStart="10dp"
                 android:layout_toEndOf="@id/card_bin"
                 android:backgroundTint="#131629"
-                app:cardCornerRadius="15dp" />
+                app:cardCornerRadius="15dp" >
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/ic_graph"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginStart="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="75dp"
+                    android:layout_marginStart="18dp"
+                    android:textSize="10sp"
+                    android:text="Analyze"
+                    android:textColor="@color/teal_200"/>
+
+            </androidx.cardview.widget.CardView>
 
         </RelativeLayout>
 
