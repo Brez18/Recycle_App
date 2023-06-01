@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,8 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Recycle_App">
         <activity
+            android:name=".ActivityBin"
+            android:exported="false" />
+        <activity
             android:name=".ActivityMain"
             android:exported="false" />
+
         <activity
             android:name=".ActivityLogin"
             android:exported="true">
@@ -20,6 +26,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

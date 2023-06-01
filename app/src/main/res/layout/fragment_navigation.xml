@@ -8,14 +8,14 @@
 
     <com.google.android.material.navigationrail.NavigationRailView
         android:id="@+id/nav_rail"
-        android:layout_width="wrap_content"
+        android:layout_width="70dp"
         android:layout_height="match_parent"
-        app:headerLayout="@layout/nav_header"
         android:background="@drawable/background_navigation_rail"
-        app:menu="@menu/nav_menu"
-        app:itemTextColor="#FFF6D9"
-        app:itemIconSize="35dp"
-        app:itemRippleColor="#FFF6D9">
+        app:headerLayout="@layout/nav_header"
+        app:itemIconSize="33dp"
+        app:itemRippleColor="#FFF6D9"
+        app:itemTextColor="@android:color/transparent"
+        app:menu="@menu/nav_menu">
 
     </com.google.android.material.navigationrail.NavigationRailView>
 

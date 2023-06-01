@@ -6,6 +6,6 @@
     style="@style/Floating"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_back_btn"
-    app:fabCustomSize="40dp"
+    app:fabCustomSize="30dp"
     >
 </com.google.android.material.floatingactionbutton.FloatingActionButton>

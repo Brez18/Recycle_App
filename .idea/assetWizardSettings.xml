@@ -78,8 +78,8 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="color" value="ffffff" />
-                                                <entry key="imagePath" value="C:\Users\Brezhnev\AppData\Local\Temp\baseline_contact_support_24.xml" />
+                                                <entry key="color" value="000000" />
+                                                <entry key="imagePath" value="C:\Users\Brezhnev\AppData\Local\Temp\baseline_ios_share_24.xml" />
                                                 <entry key="scalingPercent" value="81" />
                                                 <entry key="trimmed" value="true" />
                                               </map>
@@ -92,7 +92,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/contact_support/baseline_contact_support_24.xml" />
+                                                <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/ios_share/baseline_ios_share_24.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -139,7 +139,8 @@
                                   <option name="values">
                                     <map>
                                       <entry key="backgroundColor" value="6c2c2c" />
-                                      <entry key="outputName" value="ic_arrow_square" />
+                                      <entry key="foregroundAssetType" value="CLIP_ART" />
+                                      <entry key="outputName" value="ic_shared" />
                                     </map>
                                   </option>
                                 </PersistentState>
