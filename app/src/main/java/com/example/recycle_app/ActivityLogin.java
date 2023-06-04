@@ -69,7 +69,10 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
                 break;
 
             case R.id.createAcc:
+                intent = new Intent(this , ActivityAccountCreate.class);
+                startActivity(intent);
                 break;
+
             case R.id.forgotPass:
                 break;
 

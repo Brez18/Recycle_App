@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Recycle_App">
         <activity
+            android:name=".ActivityAccountCreate"
+            android:exported="false"/>
+        <activity
             android:name=".ActivityBin"
             android:exported="false" />
         <activity
