@@ -78,9 +78,9 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="C:\Users\Brezhnev\AppData\Local\Temp\baseline_ios_share_24.xml" />
-                                                <entry key="scalingPercent" value="81" />
+                                                <entry key="color" value="003934" />
+                                                <entry key="imagePath" value="C:\Users\Brezhnev\AppData\Local\Temp\baseline_circle_24.xml" />
+                                                <entry key="scalingPercent" value="60" />
                                                 <entry key="trimmed" value="true" />
                                               </map>
                                             </option>
@@ -92,7 +92,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/ios_share/baseline_ios_share_24.xml" />
+                                                <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/circle/baseline_circle_24.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -104,8 +104,8 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="C:\Users\Brezhnev\OneDrive\Pictures\Android_backgrounds\icon_back.png" />
-                                                <entry key="scalingPercent" value="146" />
+                                                <entry key="imagePath" value="C:\Users\Brezhnev\OneDrive\Pictures\Android_backgrounds" />
+                                                <entry key="scalingPercent" value="95" />
                                                 <entry key="trimmed" value="true" />
                                               </map>
                                             </option>
@@ -138,9 +138,9 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="backgroundColor" value="6c2c2c" />
+                                      <entry key="backgroundColor" value="000000" />
                                       <entry key="foregroundAssetType" value="CLIP_ART" />
-                                      <entry key="outputName" value="ic_shared" />
+                                      <entry key="outputName" value="dot" />
                                     </map>
                                   </option>
                                 </PersistentState>

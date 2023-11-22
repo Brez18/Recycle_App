@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_create_account"
+    app:startDestination="@id/fragment_credentials">
+
+    <fragment
+        android:id="@+id/fragment_credentials"
+        android:name="com.example.recycle_app.Fragments.Fragment_credentials"
+        android:label="fragment_credentials"
+        tools:layout="@layout/fragment_credentials" >
+        <action
+            android:id="@+id/action_fragment_credentials_to_fragmentOtp"
+            app:destination="@id/fragment_otp"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_otp"
+        android:name="com.example.recycle_app.Fragments.FragmentOtp"
+        android:label="fragment_otp"
+        tools:layout="@layout/fragment_otp" />
+</navigation>

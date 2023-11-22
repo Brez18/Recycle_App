@@ -2,24 +2,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/ic_dashboard"
-        android:title="Dashboard"
-        android:icon="@drawable/ic_dashboard_foreground"
-        />
-    <item
         android:id="@+id/ic_maps"
         android:title="Maps"
         android:icon="@drawable/ic_maps_foreground"
+        />
+
+    <item
+        android:id="@+id/ic_dashboard"
+        android:title="Dashboard"
+        android:icon="@drawable/ic_dashboard_foreground"
         />
     <item
         android:id="@+id/ic_market"
         android:title="Market"
         android:icon="@drawable/ic_market_place_foreground"
         />
-    <item
-        android:id="@+id/ic_contact_services"
-        android:title="Contacts"
-        android:icon="@drawable/ic_contact_services_foreground"
-    />
 
 </menu>

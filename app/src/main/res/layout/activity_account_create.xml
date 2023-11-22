@@ -1,200 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_create_account"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ActivityAccountCreate"
-    android:background="@drawable/background_create_acc"
+    android:background="@color/white"
     android:fitsSystemWindows="true">
 
-    <RelativeLayout
-        android:id="@+id/container_create_name"
-        android:layout_width="270dp"
-        android:layout_height="42dp"
-        android:background="@drawable/rounded_corner"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3">
 
-        <EditText
-            android:id="@+id/editText_name"
-            android:layout_width="220dp"
-            android:layout_height="42dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="50dp"
-            android:background="@null"
-            android:hint="Name"
-            android:textColor="#000"
-            android:textColorHint="#FFF6D9"
-            android:textSize="12sp"
-            tools:ignore="HardcodedText" />
-
-        <ImageView
-            android:id="@+id/ic_user"
-            android:layout_width="50dp"
-            android:layout_height="42dp"
-            android:padding="5dp"
-            android:layout_alignParentStart="true"
-            app:srcCompat="@drawable/ic_user_foreground"
-            android:foregroundTint="#FFF6D9"/>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/container_create_username"
-        android:layout_width="270dp"
-        android:layout_height="42dp"
-        android:background="@drawable/rounded_corner"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/container_create_name"
-        app:layout_constraintVertical_bias="0.03">
-
-        <EditText
-            android:id="@+id/editText2"
-            android:layout_width="220dp"
-            android:layout_height="42dp"
-            android:layout_alignParentEnd="true"
-            android:background="@null"
-            android:hint="Username"
-            android:textColor="#000"
-            android:textColorHint="#FFF6D9"
-            android:textSize="12sp"
-            tools:ignore="HardcodedText" />
-
-        <ImageView
-            android:id="@+id/ic_uname"
-            android:layout_width="37dp"
-            android:layout_height="24dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="7dp"
-            android:layout_marginTop="7dp"
-            android:layout_marginBottom="10dp"
-            app:srcCompat="@drawable/ic_user_foreground" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/container_create_email"
-        android:layout_width="270dp"
-        android:layout_height="42dp"
-        android:background="@drawable/rounded_corner"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/container_create_username"
-        app:layout_constraintVertical_bias="0.03">
-
-        <EditText
-            android:id="@+id/editText3"
-            android:layout_width="220dp"
-            android:layout_height="42dp"
-            android:layout_alignParentEnd="true"
-            android:background="@null"
-            android:hint="Email"
-            android:textColor="#000"
-            android:textColorHint="#FFF6D9"
-            android:textSize="12sp"
-            tools:ignore="HardcodedText" />
-
-        <ImageView
-            android:id="@+id/ic_mail"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_alignParentStart="true"
-            android:layout_centerInParent="true"
-            android:layout_marginStart="7dp"
-            app:srcCompat="@android:drawable/ic_dialog_email" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/container_create_password"
-        android:layout_width="270dp"
-        android:layout_height="42dp"
-        android:background="@drawable/rounded_corner"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/container_create_email"
-        app:layout_constraintVertical_bias="0.03">
-
-        <EditText
-            android:id="@+id/editText4"
-            android:layout_width="220dp"
-            android:layout_height="42dp"
-            android:layout_alignParentEnd="true"
-            android:background="@null"
-            android:hint="Password"
-            android:textColor="#000"
-            android:textColorHint="#FFF6D9"
-            android:textSize="12sp"
-            tools:ignore="HardcodedText" />
-
-        <ImageView
-            android:id="@+id/ic_lock"
-            android:layout_width="50dp"
-            android:layout_height="42dp"
-            android:layout_alignParentStart="true"
-            app:srcCompat="@drawable/ic_lock_foreground" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/container_create_contact"
-        android:layout_width="270dp"
-        android:layout_height="42dp"
-        android:background="@drawable/rounded_corner"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/container_create_password"
-        app:layout_constraintVertical_bias="0.03">
-
-        <EditText
-            android:id="@+id/editText5"
-            android:layout_width="220dp"
-            android:layout_height="42dp"
-            android:layout_alignParentEnd="true"
-            android:background="@null"
-            android:hint="Contact Number"
-            android:textColor="#000"
-            android:textColorHint="#FFF6D9"
-            android:textSize="12sp"
-            tools:ignore="HardcodedText" />
-
-        <ImageView
-            android:id="@+id/ic_contact"
-            android:padding="5dp"
-            android:layout_width="50dp"
-            android:layout_height="32dp"
-            android:layout_alignParentStart="true"
-            app:srcCompat="@android:drawable/stat_sys_phone_call" />
-
-    </RelativeLayout>
-
-    <Button
-        android:id="@+id/create_account"
-        android:layout_width="270dp"
+    <ImageView
+        android:id="@+id/btn_close"
+        android:layout_width="55dp"
         android:layout_height="55dp"
-        android:text="create account"
-        android:backgroundTint="#282950"
-        android:textColor="#FFF"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/container_create_contact"
-        app:layout_constraintVertical_bias="0.04"
-        android:onClick="onClick"/>
+        android:src="@drawable/ca_ic_close_foreground"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/login_recycle"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="20dp"
+        />
+
+    <TextView
+        android:id="@+id/txt_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="90dp"
+        android:layout_marginStart="20dp"
+        android:text="Create Account"
+        android:textColor="#425C5A"
+        android:textSize="30sp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="150dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/ca_shape_blunt_square">
+
+        <fragment
+            android:id="@+id/fragment_container"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="125dp"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/nav_graph_create_account"
+            />
+
+        <TextView
+            android:id="@+id/txt_prev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="35dp"
+            android:layout_marginBottom="35dp"
+            android:text="Previous"
+            android:visibility="invisible"
+            android:textColor="@color/white"
+            android:textSize="15sp"/>
+
+        <ImageButton
+            android:id="@+id/btn_create_account"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ca_create_arrow_foreground"
+            android:background="@drawable/ca_shape_squircle"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="20dp"
+            android:onClick="onClick"/>
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/hidden_view1"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/grey_green"
+        />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

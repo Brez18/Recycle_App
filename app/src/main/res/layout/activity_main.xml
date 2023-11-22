@@ -1,48 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ActivityMain"
-    android:background="#222021">
-
+    android:background="@color/white">
 
     <FrameLayout
         android:id="@+id/fragment_container1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_above="@id/bottom_nav_bar"
         />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/expanded_menu"
-        android:layout_width="47dp"
-        android:layout_height="47dp"
-        android:foreground="@drawable/ic_menu_foreground"
-        android:backgroundTint="@android:color/transparent"
-        app:borderWidth="0dp"
-        android:outlineProvider="none"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.04"
-        app:layout_constraintVertical_bias="0.06"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav_bar"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/btm_nav_bar_background"
+        app:itemIconSize="32dp"
+        app:itemActiveIndicatorStyle="@style/App.Custom.Indicator"
+        app:itemTextAppearanceActiveBoldEnabled="true"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="#FFF6D9"
+        app:itemRippleColor="@null"
+        app:labelVisibilityMode="selected"
+        app:menu="@menu/nav_menu" />
+
+    <View
+        android:id="@+id/hidden_view2"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/grey_green"
         />
 
-    <FrameLayout
-        android:id="@+id/fragment_container2"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-
-        />
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

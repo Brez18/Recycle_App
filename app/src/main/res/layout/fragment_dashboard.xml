@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/parent"
     android:layout_width="match_parent"
@@ -7,165 +7,230 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.FragmentDashboard">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/gradient_dashboard">
+        android:layout_height="400dp"
+        android:background="@drawable/fdash_background_shape">
 
         <ImageView
-            android:id="@+id/dash_background"
-            android:layout_width="wrap_content"
-            android:layout_height="300dp"
-            android:background="@drawable/background_dashboard"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0" />
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/login_recycle"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="20dp"/>
 
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="3dp"
+            android:src="@drawable/ic_user_foreground"/>
 
-        <com.yangp.ypwaveview.YPWaveView
-            android:id="@+id/progress_circle"
-            android:layout_width="125dp"
-            android:layout_height="125dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:animatorEnable="true"
-            app:behideColor="#D69BAD"
-            app:borderColor="#FFF6D9"
-            app:borderWidthSize="2dp"
-            app:frontColor="#FAB9B6"
-            app:shapeType="circle"
-            app:shapePadding="10dp"
-            app:textColor="@android:color/transparent"/>
-
-        <RelativeLayout
-            android:id="@+id/relativeLayout"
+        <TextView
+            android:id="@+id/greet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dash_background"
-            app:layout_constraintVertical_bias="0.7">
+            android:layout_marginTop="120dp"
+            android:layout_marginStart="40dp"
+            android:text="Hello,"
+            android:textSize="40sp"
+            android:textColor="#FFCEA2"/>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_bin"
-                android:layout_width="150dp"
-                android:layout_height="200dp"
-                android:backgroundTint="#131629"
-                app:cardCornerRadius="15dp">
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/greet"
+            android:layout_below="@+id/greet"
+            android:layout_marginTop="3dp"
+            android:text="Brez.br18"
+            android:textSize="25sp"
+            android:textColor="@color/white"/>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/ic_carbon_footprint"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignStart="@+id/greet"
+            android:layout_below="@id/greet"
+            android:layout_marginTop="70dp"
+            android:src="@drawable/fdash_ic_carbon_footprint"/>
 
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/ic_shared_foreground"
-                        android:layout_alignParentTop="true"
-                        />
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/progress_horizontal"
+            android:layout_width="150dp"
+            android:layout_height="2dp"
+            android:layout_alignTop="@+id/ic_carbon_footprint"
+            android:layout_toEndOf="@+id/ic_carbon_footprint"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="10dp"
+            android:progress="30"
+            app:indicatorColor="#FFF6D9"
+            app:trackColor="#b3ffffff"
+            app:trackCornerRadius="10dp"
+           />
 
-                    <ImageView
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:src="@drawable/ic_bin_foreground"
-                        android:layout_marginTop="110dp"
-                        android:layout_marginStart="2dp"
-                        />
-
-                    <TextView
-                        android:id="@+id/text_item_count"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:background="@drawable/background_items"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:textSize="10sp"
-                        android:padding="5dp"
-                        android:text="23 items"
-                        android:textColor="@color/teal_200"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_toEndOf="@+id/text_item_count"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginStart="5dp"
-                        android:background="@drawable/background_items"
-                        android:textSize="10sp"
-                        android:padding="5dp"
-                        android:text="0.7kg"
-                        android:textColor="@color/teal_200"/>
-
-                    <ImageView
-                        android:id="@+id/ic_shared_with"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_alignParentEnd="true"
-                        android:src="@drawable/ic_shared_with_foreground"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginTop="25dp"
-                        android:textSize="10sp"
-                        android:padding="5dp"
-                        android:text="3 people"
-                        android:textColor="#555064"/>
-
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_bin_history"
-                android:layout_width="100dp"
-                android:layout_height="90dp"
-                android:layout_alignTop="@id/card_bin"
-                android:layout_marginStart="10dp"
-                android:layout_toEndOf="@id/card_bin"
-                android:backgroundTint="#131629"
-                app:cardCornerRadius="15dp" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_analysis"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_alignBottom="@id/card_bin"
-                android:layout_marginStart="10dp"
-                android:layout_toEndOf="@id/card_bin"
-                android:backgroundTint="#131629"
-                app:cardCornerRadius="15dp" >
-
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/ic_graph"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginStart="10dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginTop="75dp"
-                    android:layout_marginStart="18dp"
-                    android:textSize="10sp"
-                    android:text="Analyze"
-                    android:textColor="@color/teal_200"/>
-
-            </androidx.cardview.widget.CardView>
-
-        </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/ic_carbon_footprint"
+            android:layout_below="@id/progress_horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="10dp"
+            android:textSize="11sp"
+            android:text="30% CF"
+            android:textColor="#FFF6D9"/>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabCustomSize="60dp"
+        android:layout_marginTop="370dp"
+        android:layout_marginStart="40dp"
+        android:backgroundTint="@color/sand"
+        app:rippleColor="#80FFCEA2"
+        android:src="@drawable/fdash_ic_notify_foreground"
+        app:maxImageSize="65dp"
+        app:tint="@null"
+        app:shapeAppearance="@style/Widget.MaterialComponents.FloatingActionButton"
+        />
+
+    <RelativeLayout
+        android:id="@+id/card_container"
+        android:layout_width="250dp"
+        android:layout_height="210dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_bin"
+            android:layout_width="120dp"
+            android:layout_height="100dp"
+            android:layout_alignParentStart="true"
+            app:cardElevation="-1dp"
+            android:backgroundTint="#F6F5FD"
+            app:cardCornerRadius="15dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="31dp"
+                android:layout_marginStart="20sp"
+                android:src="@drawable/fdash_ic_bin"/>
+
+            <TextView
+                android:id="@+id/txt_bin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="65dp"
+                android:textSize="13sp"
+                android:textColor="@color/black"
+                android:text="My Bin"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_2"
+            android:layout_width="120dp"
+            android:layout_height="100dp"
+            android:layout_alignParentEnd="true"
+            app:cardElevation="-1dp"
+            android:backgroundTint="#D9EADA"
+            app:cardCornerRadius="15dp">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="29dp"
+                android:layout_marginStart="20sp"
+                android:src="@drawable/fdash_ic_analyze"/>
+
+            <TextView
+                android:id="@+id/txt_analyze"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="65dp"
+                android:textSize="13sp"
+                android:textColor="@color/black"
+                android:text="Analyze"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_3"
+            app:cardElevation="-1dp"
+            android:layout_width="120dp"
+            android:layout_height="100dp"
+            android:backgroundTint="#FFF9F1"
+            android:layout_marginTop="10dp"
+            android:layout_alignStart="@id/card_bin"
+            android:layout_below="@id/card_bin"
+            app:cardCornerRadius="15dp">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="27dp"
+                android:src="@drawable/fdash_ic_history" />
+
+            <TextView
+                android:id="@+id/txt_history"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="65dp"
+                android:textSize="13sp"
+                android:textColor="@color/black"
+                android:text="History"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_4"
+            android:layout_width="120dp"
+            android:layout_height="100dp"
+            app:cardElevation="-1dp"
+            android:backgroundTint="#F3F4F6"
+            android:layout_below="@id/card_2"
+            android:layout_alignEnd="@+id/card_2"
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="15dp">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="29dp"
+                android:layout_marginStart="20sp"
+                android:src="@drawable/fdash_ic_recycling_plant"/>
+
+            <TextView
+                android:id="@+id/txt_firms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="65dp"
+                android:textSize="13sp"
+                android:textColor="@color/black"
+                android:text="Firms"/>
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
 
 
-</FrameLayout>
+
+
+
+
+</RelativeLayout>

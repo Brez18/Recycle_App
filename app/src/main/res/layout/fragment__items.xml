@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragments.Fragment_Items">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/bin_items"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:elevation="10dp"
+        app:fabCustomSize="60dp"
+        app:maxImageSize="40dp"
+        app:tint="@color/white"
+        android:backgroundTint="@color/grey_green"
+        android:src="@drawable/bin_ic_add_foreground"
+        app:shapeAppearance="@style/Widget.MaterialComponents.FloatingActionButton" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/btn_options"
+        android:layout_alignStart="@id/btn_options"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="15dp"
+        android:elevation="10dp"
+        android:visibility="invisible"
+        app:fabCustomSize="45dp"
+        app:maxImageSize="35dp"
+        app:tint="@color/grey_green"
+        app:rippleColor="@color/light_grey"
+        android:backgroundTint="@color/white"
+        android:src="@drawable/bin_ic_edit_foreground"
+        app:shapeAppearance="@style/Widget.MaterialComponents.FloatingActionButton"
+        />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_detect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/btn_edit"
+        android:layout_alignStart="@id/btn_options"
+        android:layout_marginBottom="15dp"
+        android:layout_marginStart="5dp"
+        android:elevation="10dp"
+        android:visibility="invisible"
+        app:fabCustomSize="45dp"
+        app:rippleColor="@color/light_grey"
+        android:backgroundTint="@color/white"
+        app:tint="@color/grey_green"
+        app:maxImageSize="20dp"
+        android:src="@drawable/fi_ic_ai"
+        app:shapeAppearance="@style/Widget.MaterialComponents.FloatingActionButton"
+        />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/btn_detect"
+        android:layout_alignStart="@id/btn_options"
+        android:layout_marginBottom="15dp"
+        android:layout_marginStart="5dp"
+        android:elevation="10dp"
+        android:visibility="invisible"
+        app:fabCustomSize="45dp"
+        app:rippleColor="@color/light_grey"
+        android:backgroundTint="@color/white"
+        app:tint="#FF1744"
+        app:maxImageSize="22dp"
+        android:src="@drawable/fi_delete_items"
+        app:shapeAppearance="@style/Widget.MaterialComponents.FloatingActionButton"
+        />
+
+</RelativeLayout>

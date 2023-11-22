@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -9,27 +12,50 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Recycle_App">
+        android:theme="@style/Theme.Recycle_App"
+        android:usesCleartextTraffic="true">
         <activity
-            android:name=".ActivityAccountCreate"
-            android:exported="false"/>
-        <activity
-            android:name=".ActivityBin"
-            android:exported="false" />
-        <activity
-            android:name=".ActivityMain"
-            android:exported="false" />
-
+            android:name=".ActivityObjectDetect"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ActivityLogin"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ActivityCreateItem"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityAccountCreate"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityMain"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityBin"
+            android:exported="false"
+            android:screenOrientation="portrait" />
 
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.recycle_app.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
+
+
 
 </manifest>

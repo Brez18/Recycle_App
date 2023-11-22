@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragments.Fragment_Overview"
+    android:id="@+id/rl_overview">
+
+    <RelativeLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/bin_shape_squircle">
+
+
+        <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:layout_centerInParent="true"
+            android:backgroundTint="#f0f4f4"
+            app:strokeWidth="0dp"
+            app:cardPreventCornerOverlap="true"
+            app:cardCornerRadius="100dp"
+            app:cardElevation="15dp"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/txt_progress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="25"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/grey_green"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/txt_progress"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="3dp"
+                    android:layout_toEndOf="@id/txt_progress"
+                    android:text="%"
+                    android:textColor="@color/grey_green"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+        </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
+
+
+        <antonkozyriatskyi.circularprogressindicator.CircularProgressIndicator
+            android:id="@+id/progress_circle"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerInParent="true"
+            app:direction="clockwise"
+            app:enableProgressAnimation="true"
+            app:progressBackgroundColor="@color/white"
+            app:progressColor="@color/grey_green"
+            app:progressStrokeWidth="13dp"
+            app:textColor="@color/transparent"
+            app:textSize="30sp">
+
+        </antonkozyriatskyi.circularprogressindicator.CircularProgressIndicator>
+
+        <View
+            android:id="@+id/indicator_used"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_below="@id/progress_circle"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/bin_shape_indicator"
+            android:backgroundTint="@color/grey_green" />
+
+        <TextView
+            android:id="@+id/txt_used"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/progress_circle"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/indicator_used"
+            android:text="Used"
+            android:textColor="#99808080"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/txt_Used"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/txt_used"
+            android:layout_alignBottom="@id/indicator_used"
+            android:text="3 kg"
+            android:textColor="@color/grey"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/indicator_free"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_below="@id/progress_circle"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="80dp"
+            android:background="@drawable/bin_shape_indicator"
+            android:backgroundTint="@color/light_grey" />
+
+        <TextView
+            android:id="@+id/txt_free"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/progress_circle"
+            android:layout_alignStart="@+id/indicator_free"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="10dp"
+            android:text="Free"
+            android:textColor="#99808080"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txt_Free"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/txt_free"
+            android:layout_alignBottom="@id/indicator_free"
+            android:text="6 kg"
+            android:textColor="@color/grey"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/container"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:padding="25dp"
+        android:background="@drawable/bin_shape_squircle">
+
+        <ImageView
+            android:id="@+id/img_plastic"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_toStartOf="@id/img_paper"
+            android:layout_marginEnd="60dp"
+            android:src="@drawable/bin_ic_plastic_bag"/>
+
+        <TextView
+            android:id="@+id/txt_plastic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/img_plastic"
+            android:layout_below="@id/img_plastic"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="4dp"
+            android:text="20%"
+            android:textColor="@color/grey"
+            android:textSize="10sp"
+            android:textStyle="bold"/>
+
+        <ImageView
+            android:id="@+id/img_paper"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/bin_ic_paper"/>
+
+        <TextView
+            android:id="@+id/txt_paper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/img_paper"
+            android:layout_below="@id/img_paper"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="7dp"
+            android:text="10%"
+            android:textColor="@color/grey"
+            android:textSize="10sp"
+            android:textStyle="bold"/>
+
+        <ImageView
+            android:id="@+id/img_metal"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="60dp"
+            android:layout_toEndOf="@id/img_paper"
+            android:src="@drawable/bin_ic_metal"/>
+
+        <TextView
+            android:id="@+id/txt_metal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/img_metal"
+            android:layout_below="@id/img_metal"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="10dp"
+            android:text="5%"
+            android:textColor="@color/grey"
+            android:textSize="10sp"
+            android:textStyle="bold"/>
+
+
+        <ImageView
+            android:id="@+id/img_glass"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="50dp"
+            android:layout_below="@id/img_paper"
+            android:layout_alignStart="@id/img_paper"
+            android:src="@drawable/bin_ic_glass"/>
+
+        <TextView
+            android:id="@+id/txt_glass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/img_glass"
+            android:layout_below="@id/img_glass"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="5dp"
+            android:text="15%"
+            android:textColor="@color/grey"
+            android:textSize="10sp"
+            android:textStyle="bold"/>
+
+
+        <ImageView
+            android:id="@+id/img_rubber"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="50dp"
+            android:layout_below="@id/img_plastic"
+            android:layout_alignStart="@id/img_plastic"
+            android:src="@drawable/bin_ic_rubber"/>
+
+        <TextView
+            android:id="@+id/txt_rubber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/img_rubber"
+            android:layout_below="@id/img_rubber"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="10dp"
+            android:text="8%"
+            android:textColor="@color/grey"
+            android:textSize="10sp"
+            android:textStyle="bold"/>
+
+        <ImageView
+            android:id="@+id/img_ewaste"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="50dp"
+            android:layout_below="@id/img_metal"
+            android:layout_alignStart="@id/img_metal"
+            android:src="@drawable/bin_ic_ewaste"/>
+
+        <TextView
+            android:id="@+id/txt_ewaste"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/img_ewaste"
+            android:layout_below="@id/img_ewaste"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="5dp"
+            android:text="15%"
+            android:textColor="@color/grey"
+            android:textSize="10sp"
+            android:textStyle="bold"/>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

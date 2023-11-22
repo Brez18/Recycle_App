@@ -7,4 +7,17 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="grey_green">#425C5A</color>
+    <color name="light_grey_green">#F5F7F6</color>
+    <color name="sand">#FFCEA2</color>
+    <color name="grey">#808080</color>
+    <color name="light_grey">#59808080</color>
+    <color name="light_purple">#ECEBF3</color>
+    <color name="pale_yellow">#F9F5EC</color>
+    <color name="pale_grey">#f5f5f5</color>
+    <color name="pale_green">#D1E1D1</color>
+    <color name="lime_yellow">#F1EBE0</color>
+    <color name="light_orange">#F4ECE9</color>
+    <color name="light_green">#DBE9E5</color>
+    <color name="transparent">@android:color/transparent</color>
 </resources>

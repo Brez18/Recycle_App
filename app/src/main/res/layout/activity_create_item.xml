@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivityCreateItem"
+    android:id="@+id/activity_createItem"
+    android:background="@color/white">
+
+    <Button
+        android:id="@+id/btn_ok"
+        android:layout_width="70dp"
+        android:layout_height="45dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="15dp"
+        android:text="OK"
+        android:textSize="12sp"
+        />
+
+    <ImageView
+        android:id="@+id/btn_close"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/btn_ok"
+        android:layout_marginTop="7dp"
+        android:layout_marginStart="15dp"
+        android:src="@drawable/ci_ic_close_foreground"/>
+
+    <TextView
+        android:id="@+id/txt_itemName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_close"
+        android:layout_alignStart="@id/btn_close"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="20dp"
+        android:text="Item Name"
+        android:textColor="@color/grey"
+        android:textStyle="bold"
+        android:textSize="30sp"/>
+
+    <ImageView
+        android:id="@+id/error_itemName"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/txt_itemName"
+        android:layout_alignBottom="@id/txt_itemName"
+        android:layout_toEndOf="@id/txt_itemName"
+        android:visibility="invisible"
+        android:src="@drawable/ca_ic_error_foreground"/>
+
+    <RelativeLayout
+        android:id="@+id/container_itemName"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignStart="@id/btn_close"
+        android:layout_alignEnd="@+id/btn_ok"
+        android:layout_below="@id/txt_itemName"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/bin_shape_squircle">
+
+        <EditText
+            android:id="@+id/edt_txt_itemName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:hint="Write your item name here"
+            android:textColorHint="@color/light_grey"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textStyle="bold"
+            android:background="@null"
+            android:textColor="@color/grey_green"
+            android:textSize="15sp"
+            android:textCursorDrawable="@drawable/ci_edt_txt_cursor"
+            />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/txt_itemQty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/txt_itemName"
+        android:layout_below="@+id/container_itemName"
+        android:layout_marginTop="40dp"
+        android:textSize="25sp"
+        android:textColor="@color/grey"
+        android:textStyle="bold"
+        android:text="Quantity"/>
+
+    <ImageView
+        android:id="@+id/error_itemQty"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/txt_itemQty"
+        android:layout_alignBottom="@id/txt_itemQty"
+        android:layout_toEndOf="@id/txt_itemQty"
+        android:visibility="invisible"
+        android:src="@drawable/ca_ic_error_foreground"/>
+
+    <TextView
+        android:id="@+id/txt_itemWeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/container_itemName"
+        android:layout_below="@+id/container_itemName"
+        android:layout_marginTop="40dp"
+        android:textSize="25sp"
+        android:textColor="@color/grey"
+        android:textStyle="bold"
+        android:text="Weight"/>
+
+    <ImageView
+        android:id="@+id/error_itemWeight"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/txt_itemWeight"
+        android:layout_alignBottom="@id/txt_itemWeight"
+        android:layout_toEndOf="@id/txt_itemWeight"
+        android:visibility="invisible"
+        android:src="@drawable/ca_ic_error_foreground"/>
+
+    <RelativeLayout
+        android:id="@+id/container_itemQty"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignStart="@id/txt_itemQty"
+        android:layout_alignEnd="@id/txt_itemQty"
+        android:layout_marginStart="10dp"
+        android:layout_below="@id/txt_itemQty"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/bin_shape_squircle">
+
+        <EditText
+            android:id="@+id/edt_txt_itemQty"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:hint="qty"
+            android:textColorHint="@color/light_grey"
+            android:inputType="number"
+            android:maxLength="3"
+            android:maxLines="1"
+            android:textStyle="bold"
+            android:background="@null"
+            android:textColor="@color/grey_green"
+            android:textSize="15sp"
+            android:textCursorDrawable="@drawable/ci_edt_txt_cursor"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/container_itemWeight"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignStart="@id/txt_itemWeight"
+        android:layout_alignEnd="@+id/txt_itemWeight"
+        android:layout_below="@id/txt_itemQty"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bin_shape_squircle">
+
+        <EditText
+            android:id="@+id/edt_txt_itemWeight"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:hint="kg"
+            android:textColorHint="@color/light_grey"
+            android:inputType="numberDecimal"
+            android:maxLength="4"
+            android:maxLines="1"
+            android:textStyle="bold"
+            android:background="@null"
+            android:textColor="@color/grey_green"
+            android:textSize="15sp"
+            android:textCursorDrawable="@drawable/ci_edt_txt_cursor"
+            />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/txt_itemCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/container_itemQty"
+        android:layout_alignStart="@id/txt_itemQty"
+        android:layout_marginTop="40dp"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="@color/grey"
+        android:text="Category"/>
+
+    <ImageView
+        android:id="@+id/error_itemCategory"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/txt_itemCategory"
+        android:layout_alignBottom="@id/txt_itemCategory"
+        android:layout_toEndOf="@id/txt_itemCategory"
+        android:visibility="invisible"
+        android:src="@drawable/ca_ic_error_foreground"/>
+
+    <HorizontalScrollView
+        android:id="@+id/horizontal_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_itemCategory"
+        android:layout_marginTop="20dp"
+        android:layout_alignStart="@id/btn_close"
+        android:layout_alignEnd="@id/btn_ok">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+
+            <RelativeLayout
+                android:id="@+id/container_plastic"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:background="@drawable/bin_shape_squircle">
+
+                <TextView
+                    android:id="@+id/txt_plastic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="#plastic"
+                    android:textColor="@color/light_grey"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/container_paper"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:layout_toEndOf="@+id/container_plastic"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/bin_shape_squircle">
+
+                <TextView
+                    android:id="@+id/txt_paper"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="#paper"
+                    android:textColor="@color/light_grey"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/container_metal"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:layout_toEndOf="@+id/container_paper"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/bin_shape_squircle">
+
+                <TextView
+                    android:id="@+id/txt_metal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="#metal"
+                    android:textStyle="bold"
+                    android:textColor="@color/light_grey"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/container_rubber"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:layout_toEndOf="@+id/container_metal"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/bin_shape_squircle">
+
+                <TextView
+                    android:id="@+id/txt_rubber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="#rubber"
+                    android:textStyle="bold"
+                    android:textColor="@color/light_grey"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/container_glass"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:layout_toEndOf="@+id/container_rubber"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/bin_shape_squircle">
+
+                <TextView
+                    android:id="@+id/txt_glass"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="#glass"
+                    android:textColor="@color/light_grey"
+                    android:textStyle="bold"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/container_ewaste"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:layout_toEndOf="@+id/container_glass"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/bin_shape_squircle">
+
+                <TextView
+                    android:id="@+id/txt_ewaste"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="#e-waste"
+                    android:textColor="@color/light_grey"
+                    android:textStyle="bold"
+                    />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+    </HorizontalScrollView>
+
+
+    <HorizontalScrollView
+        android:id="@+id/camera_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_below="@id/horizontal_scroll"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        >
+
+        <RelativeLayout
+            android:id="@+id/camera_scroll_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+
+            <RelativeLayout
+                android:id="@+id/img_camera_container"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/bin_shape_squircle">
+
+                <ImageView
+                    android:id="@+id/img_camera"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/bin_ic_camera_foreground"
+                    app:tint="@color/light_grey" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+    </HorizontalScrollView>
+
+
+</RelativeLayout>
