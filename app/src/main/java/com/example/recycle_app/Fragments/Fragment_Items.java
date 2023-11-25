@@ -46,7 +46,7 @@ import java.util.ArrayList;
 public class Fragment_Items extends Fragment {
 
     private Animation rotateOpen,rotateClose,fromBottom,toBottom;
-    private boolean clicked = false;
+    private boolean clicked = false,flag = false;
     private FloatingActionButton options,edit,detection,delete;
     private Bin_Items_Adapter bin_items_adapter;
 
@@ -142,12 +142,15 @@ public class Fragment_Items extends Fragment {
         });
 
         ViewCompat.setOnApplyWindowInsetsListener(options, (v, windowInsets) -> {
-            Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
+            if(!flag) {
+                Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
 
-            ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
+                ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
 
-            layoutParams.bottomMargin = layoutParams.bottomMargin + insets.bottom;
-            options.setLayoutParams(layoutParams);
+                layoutParams.bottomMargin = layoutParams.bottomMargin + insets.bottom;
+                options.setLayoutParams(layoutParams);
+                flag = true;
+            }
 
             // Return CONSUMED if you don't want want the window insets to keep passing
             // down to descendant views.

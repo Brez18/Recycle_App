@@ -174,19 +174,25 @@ public class ActivityCreateItem extends AppCompatActivity {
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                for (File photo : delete_photos_on_ok)
-                    photo.delete();
-                if (checkEdtText(itemName) && checkEdtText(qty) && checkEdtText(weight) && checkSelected() && checkDir()) {
-                    Intent result_intent = new Intent();
-                    result_intent.putExtra("Item_name", itemName.getText().toString().trim());
-                    result_intent.putExtra("Item_category", selected_txt_category.getText().toString());
-                    result_intent.putExtra("Item_qty", qty.getText().toString());
-                    result_intent.putExtra("Item_weight", weight.getText().toString());
-                    setResult(RESULT_OK, result_intent);
-                    if(mode.equals("edit"))
-                        result_intent.putExtra("Position", postion);
-                    finish();
+                if(delete_photos_on_ok.size()!=dir.listFiles().length) {
+                    for (File photo : delete_photos_on_ok)
+                        photo.delete();
+
+                    if (checkEdtText(itemName) && checkEdtText(qty) && checkEdtText(weight) && checkSelected()) {
+                        Intent result_intent = new Intent();
+                        result_intent.putExtra("Item_name", itemName.getText().toString().trim());
+                        result_intent.putExtra("Item_category", selected_txt_category.getText().toString());
+                        result_intent.putExtra("Item_qty", qty.getText().toString());
+                        result_intent.putExtra("Item_weight", weight.getText().toString());
+                        setResult(RESULT_OK, result_intent);
+                        if(mode.equals("edit"))
+                            result_intent.putExtra("Position", postion);
+                        finish();
+                    }
                 }
+                else
+                    Toast.makeText(ActivityCreateItem.this, "Please upload at least one image", Toast.LENGTH_SHORT).show();
+
 
             }
         });
@@ -488,15 +494,6 @@ public class ActivityCreateItem extends AppCompatActivity {
         if(selected_item==null)
         {
             findViewById(R.id.error_itemCategory).setVisibility(View.VISIBLE);
-            return false;
-        }
-        return true;
-    }
-
-    private boolean checkDir()
-    {
-        if(dir==null || Objects.requireNonNull(dir.listFiles()).length==0) {
-            Toast.makeText(ActivityCreateItem.this, "Please upload at least one image", Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;
