@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -46,7 +47,7 @@ public class ActivityCreateItem extends AppCompatActivity {
     private ArrayList<File> delete_photos_on_close = new ArrayList<>();
     private File imgFile=null,dir=null;
     private Uri imgUri = null;
-    private String mode,undo_item_name;
+    private String mode, undo_item_name;
 
     private ImageView close;
     int postion = 0;
@@ -89,9 +90,12 @@ public class ActivityCreateItem extends AppCompatActivity {
                     File[] photos = dir.listFiles();
                     File oldDir = dir;
 
-                    String filepath = "/Images"+"/"+undo_item_name;
+                    String filepath = "/Images"+"/"+ undo_item_name;
                     dir = new File(getFilesDir(), filepath);
                     dir.mkdirs();
+
+                    for (File photo : delete_photos_on_close)
+                        photo.delete();
 
                     assert photos != null;
                     for(File photo: photos){
@@ -99,8 +103,6 @@ public class ActivityCreateItem extends AppCompatActivity {
                     }
                     oldDir.delete();
 
-                    for (File photo : delete_photos_on_close)
-                        photo.delete();
                 }
                 finish();
             }
@@ -138,6 +140,9 @@ public class ActivityCreateItem extends AppCompatActivity {
                         photo.renameTo(new File(dir + "/"+ photo.getName()));
                     }
                     oldDir.delete();
+
+                    delete_photos_on_close.replaceAll(file -> new File(dir + "/" + file.getName()));
+
                 }
             }
         });
@@ -405,11 +410,11 @@ public class ActivityCreateItem extends AppCompatActivity {
         if(photo!=null){
             Bitmap myBitmap = BitmapFactory.decodeFile(photo.getAbsolutePath());
             imageView.setImageBitmap(myBitmap);
-            imageView.setTag(photo.getAbsolutePath());
+            imageView.setTag(photo.getName());
         }
         else {
             imageView.setImageURI(uri);
-            imageView.setTag(imgFile.getAbsolutePath());
+            imageView.setTag(imgFile.getName());
             delete_photos_on_close.add(imgFile);
         }
 
@@ -429,7 +434,8 @@ public class ActivityCreateItem extends AppCompatActivity {
                     public void onClick(View view) {
                         Animation zoom_in = AnimationUtils.loadAnimation(getBaseContext(), R.anim.zoom_in);
                         zoom_in.setDuration(200);
-                        File img_to_be_deleted = new File((String) imageView.getTag());
+
+                        File img_to_be_deleted = new File(dir +"/" +(String) imageView.getTag());
 
                         if(mode.equals("create"))
                             img_to_be_deleted.delete();
