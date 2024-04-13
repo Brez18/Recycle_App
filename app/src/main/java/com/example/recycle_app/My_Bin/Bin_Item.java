@@ -1,27 +1,30 @@
 package com.example.recycle_app.My_Bin;
 
+import android.graphics.Bitmap;
+import android.graphics.Rect;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+import java.util.ArrayList;
+
 public class Bin_Item implements Parcelable {
 
     private String Item_name;
     private String Qty;
-    private String Category;
+    private String Category; // category saved as #plastic, #glass, #e-waste etc
     private String Weight;
+    private ArrayList<String> images;
 
-    Bin_Item(){}
+    public Bin_Item(){}
 
     public Bin_Item(String itemName, String category,String qty, String weight) {
         this.Item_name = itemName;
+        this.Category = category;
         this.Qty = qty;
         this.Weight = weight;
-        this.Category = category;
-
     }
-
 
     protected Bin_Item(Parcel in) {
         Item_name = in.readString();
@@ -72,6 +75,14 @@ public class Bin_Item implements Parcelable {
 
     public void setCategory(String category) {
         Category = category;
+    }
+
+    public ArrayList<String> getImages() {
+        return images;
+    }
+
+    public void setImages(ArrayList<String> images) {
+        this.images = images;
     }
 
     @Override

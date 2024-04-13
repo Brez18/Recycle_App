@@ -1,12 +1,10 @@
 package com.example.recycle_app;
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,12 +23,10 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.chaos.view.PinView;
-import com.example.recycle_app.Database.Otp_handler;
+import com.example.recycle_app.Database.Firebase_handler;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
-
-import java.io.Console;
-import java.util.Objects;
 
 
 public class ActivityAccountCreate extends AppCompatActivity{
@@ -79,7 +75,7 @@ public class ActivityAccountCreate extends AppCompatActivity{
         TextView txt = findViewById(R.id.txt_title);
         NavController nav_controller = Navigation.findNavController(this,R.id.fragment_container);
         ImageButton submit = findViewById(R.id.btn_create_account);
-        Otp_handler handler = new Otp_handler(ActivityAccountCreate.this);
+        Firebase_handler firebase_handler = new Firebase_handler(ActivityAccountCreate.this);
         Bundle bundle = new Bundle();
 
         submit.setOnClickListener(new View.OnClickListener() {
@@ -88,39 +84,47 @@ public class ActivityAccountCreate extends AppCompatActivity{
 
                 if (nav_controller.getCurrentDestination().getId() == R.id.fragment_credentials)
                 {
-
-                    if (Is_Valid_Uname_Password(findViewById(R.id.editText_uname), "uname") && Is_Valid_Email(findViewById(R.id.editText_mail))
-                            && Is_Valid_Uname_Password(findViewById(R.id.editText_password), "password") &&
-                            Is_Valid_Phone(findViewById(R.id.editText_phone)))
+                    if (Is_Valid_Uname_Password_Address(findViewById(R.id.editText_uname), "uname") && Is_Valid_Email(findViewById(R.id.editText_mail))
+                            && Is_Valid_Uname_Password_Address(findViewById(R.id.editText_password), "password") &&
+                            Is_Valid_Phone(findViewById(R.id.editText_phone)) && Is_Valid_Uname_Password_Address(findViewById(R.id.editText_address),"address"))
                     {
+                        EditText edt_uname = findViewById(R.id.editText_uname);
                         EditText edt_phone = findViewById(R.id.editText_phone);
-                        handler.setPhoneNumber(edt_phone.getText().toString());
-                        handler.send();
+                        EditText edt_mail = findViewById(R.id.editText_mail);
+                        EditText edt_pass = findViewById(R.id.editText_password);
+                        EditText edt_address = findViewById(R.id.editText_address);
+
+                        firebase_handler.setUname(edt_uname.getText().toString());
+                        firebase_handler.setEmail(edt_mail.getText().toString());
+                        firebase_handler.setPassword(edt_pass.getText().toString());
+                        firebase_handler.setPhoneNumber(edt_phone.getText().toString());
+                        firebase_handler.setAddress(edt_address.getText().toString());
+
+
                         bundle.putString("phone_no", edt_phone.getText().toString());
-                        bundle.putParcelable("handler", handler);
-                        nav_controller.navigate(R.id.action_fragment_credentials_to_fragmentOtp, bundle);
-                        prev.setVisibility(View.VISIBLE);
-                        txt.setText("OTP Verification");
+                        bundle.putParcelable("handler", firebase_handler);
+                        firebase_handler.createUserWithEmail(nav_controller,bundle,prev,txt);
+
                     }
                 }
+
                 else if(nav_controller.getCurrentDestination().getId() == R.id.fragment_otp){
                     ProgressBar circle = findViewById(R.id.progress_circle);
                     PinView pin_otp = findViewById(R.id.pin_otp);
                     String sms_code = pin_otp.getText().toString();
-                    String verificationID = handler.getVerificationID();
+                    String verificationID = firebase_handler.getVerificationID();
 
-                    handler.setCircle(circle);
+                    firebase_handler.setCircle(circle);
 
                     if(!sms_code.equals("") && verificationID!=null) {
                         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationID, sms_code);
-                        handler.signIn(credential);
+                        firebase_handler.signInWithOTP(credential);
                     }
                     else
                     {
                         Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                         v.vibrate(VibrationEffect.createOneShot(150, VibrationEffect.DEFAULT_AMPLITUDE));
                     }
-
                 }
             }
         });
@@ -149,16 +153,26 @@ public class ActivityAccountCreate extends AppCompatActivity{
         super.onBackPressed();
     }
 
-    boolean Is_Valid_Uname_Password(EditText edt, String type)
+    boolean Is_Valid_Uname_Password_Address(EditText edt, String type)
     {
         ImageView error;
-        if(type.equals("uname"))
+        View background_view;
+        if(type.equals("uname")) {
             error = findViewById(R.id.ic_error1);
-        else
+            background_view = findViewById(R.id.background_error1);
+        }
+        else if(type.equals("password")){
             error = findViewById(R.id.ic_error3);
-        TextWatcher(edt,error);
+            background_view = findViewById(R.id.background_error3);
+        }
+        else{
+            error = findViewById(R.id.ic_error5);
+            background_view = findViewById(R.id.background_error5);
+        }
+        TextWatcher(edt,error,background_view);
         if(edt.getText().toString().equals("")) {
             error.setVisibility(View.VISIBLE);
+            background_view.setVisibility(View.VISIBLE);
             return false;
         }
         return true;
@@ -168,14 +182,17 @@ public class ActivityAccountCreate extends AppCompatActivity{
     {
         String mail = edt.getText().toString();
         ImageView error = findViewById(R.id.ic_error2);
-        TextWatcher(edt,error);
+        View background_view = findViewById(R.id.background_error2);
+        TextWatcher(edt,error,background_view);
 
         boolean result = Patterns.EMAIL_ADDRESS.matcher(mail).matches();
         if(!result) {
             error.setVisibility(View.VISIBLE);
+            background_view.setVisibility(View.VISIBLE);
             return false;
         }
         error.setVisibility(View.GONE);
+        background_view.setVisibility(View.GONE);
         return true;
     }
 
@@ -183,19 +200,22 @@ public class ActivityAccountCreate extends AppCompatActivity{
     {
         String phone = edt.getText().toString();
         ImageView error = findViewById(R.id.ic_error4);
-        TextWatcher(edt,error);
+        View background_view = findViewById(R.id.background_error4);
+        TextWatcher(edt,error,background_view);
         boolean result = Patterns.PHONE.matcher(phone).matches();
 
         if(!result || phone.length()!=10) {
             error.setVisibility(View.VISIBLE);
+            background_view.setVisibility(View.VISIBLE);
             return false;
         }
         error.setVisibility(View.GONE);
+        background_view.setVisibility(View.GONE);
         return true;
 
     }
 
-    void TextWatcher(EditText edt, ImageView error)
+    void TextWatcher(EditText edt, ImageView error,View background_view)
     {
         edt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -203,8 +223,10 @@ public class ActivityAccountCreate extends AppCompatActivity{
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(error.getVisibility()==View.VISIBLE)
+                if(error.getVisibility()==View.VISIBLE) {
                     error.setVisibility(View.GONE);
+                    background_view.setVisibility(View.GONE);
+                }
             }
             @Override
             public void afterTextChanged(Editable editable) {}

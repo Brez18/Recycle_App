@@ -28,7 +28,7 @@
        app:layout_constraintStart_toStartOf="parent"
        app:layout_constraintEnd_toEndOf="parent"
        app:layout_constraintHorizontal_bias="0.2"
-       android:text="Could'nt find your account"
+       android:text="Invalid Email or Password"
        android:textColor="#FFFF1744"
        android:visibility="invisible"
        android:textSize="10sp"
@@ -164,7 +164,7 @@
        android:text="Log In"
        android:backgroundTint="#FFCEA2"
        android:textColor="#425C5A"
-       android:textSize="11sp"
+       android:textSize="13sp"
        app:layout_constraintBottom_toBottomOf="parent"
        app:layout_constraintEnd_toEndOf="parent"
        app:layout_constraintStart_toStartOf="parent"
@@ -175,7 +175,7 @@
 
    <RelativeLayout
        android:layout_width="wrap_content"
-       android:layout_height="30dp"
+       android:layout_height="wrap_content"
        app:layout_constraintTop_toBottomOf="@+id/LogIn"
        app:layout_constraintBottom_toBottomOf="parent"
        app:layout_constraintStart_toStartOf="@+id/LogIn"
@@ -200,6 +200,14 @@
           android:textSize="12.5sp"
           android:layout_toEndOf="@+id/text"
           />
+
+      <ProgressBar
+          android:id="@+id/progress_circle"
+          android:layout_width="20dp"
+          android:layout_height="20dp"
+          android:layout_centerHorizontal="true"
+          android:layout_marginTop="25dp"
+          android:visibility="invisible"/>
 
    </RelativeLayout>
 

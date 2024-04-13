@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="item_container" type="id" />
+    <item name="dot_info" type="id" />
+    <item name="obj_name" type="id" />
+    <item name="b_box" type="id" />
+    <item name="category" type="id" />
 </resources>

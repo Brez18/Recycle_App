@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivityMyBin"
+    android:background="@color/white"
+    android:id="@+id/rl_bin"
+    >
+
+    <TextView
+        android:id="@+id/txt_bin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
+        android:text="My Bin"
+        android:textColor="@color/grey_green"
+        android:textSize="25sp"/>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/btn_container"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/txt_bin"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        app:tabRippleColor="@null"
+        app:tabTextColor="#99808080"
+        app:tabSelectedTextColor="@color/grey_green"
+        android:background="@drawable/bin_shape_squircle">
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/btn_overview"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Overview"
+
+            />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/btn_items"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="   Items   " />
+
+
+    </com.google.android.material.tabs.TabLayout>
+
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager_mybin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/btn_container"/>
+
+
+</RelativeLayout>

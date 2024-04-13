@@ -1,12 +1,8 @@
 package com.example.recycle_app.Fragments;
 
-import static android.app.Activity.RESULT_OK;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.activity.result.ActivityResult;
@@ -22,24 +18,21 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
-import com.example.recycle_app.ActivityCreateItem;
+import com.airbnb.lottie.LottieAnimationView;
+import com.example.recycle_app.ActivityItem;
 import com.example.recycle_app.ActivityObjectDetect;
+import com.example.recycle_app.Database.DatabaseHelper;
 import com.example.recycle_app.My_Bin.Bin_Item;
 import com.example.recycle_app.My_Bin.Bin_Items_Adapter;
-import com.example.recycle_app.Object_Detection.JavaObjectDetection;
 import com.example.recycle_app.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 
 
@@ -50,37 +43,12 @@ public class Fragment_Items extends Fragment {
     private FloatingActionButton options,edit,detection,delete;
     private Bin_Items_Adapter bin_items_adapter;
 
+    LottieAnimationView empty_bin;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-//                new ActivityResultCallback<ActivityResult>() {
-//                    @Override
-//                    public void onActivityResult(ActivityResult result) {
-//
-//                        JavaObjectDetection objectDetection = new JavaObjectDetection();
-//
-//                        if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-//                            Bundle bundle = result.getData().getExtras();
-//                            Bitmap bitmap = (Bitmap) bundle.get("data");
-//                            File filesDir = getContext().getFilesDir();
-//                            File imageFile = new File(filesDir, "Photo" + ".jpg");
-//
-//                            OutputStream os;
-//                            try {
-//                                os = new FileOutputStream(imageFile);
-//                                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, os);
-//                                os.flush();
-//                                os.close();
-//                            } catch (Exception e) {
-//                                Log.e(getClass().getSimpleName(), "Error writing bitmap", e);
-//                            }
-//                            objectDetection.detect(imageFile);
-//                        }
-//                    }
-//                });
-
     }
 
     @Override
@@ -94,6 +62,8 @@ public class Fragment_Items extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        empty_bin = view.findViewById(R.id.empty_bin);
 
 
         ActivityResultLauncher<Intent> result_edit_launcher = registerForActivityResult(
@@ -117,10 +87,14 @@ public class Fragment_Items extends Fragment {
         RecyclerView bin_recycler_view = view.findViewById(R.id.bin_items);
         ArrayList<Bin_Item> bin_items = getArguments().getParcelableArrayList("BinItems");
         bin_items_adapter = new Bin_Items_Adapter(bin_items,bin_recycler_view,result_edit_launcher);
+        bin_items_adapter.setEmpty_bin(empty_bin);
+        bin_items_adapter.setTxt_no_items(view.findViewById(R.id.txt_no_items));
+
+
+        bin_items_adapter.checkBinItemSize();
 
         bin_recycler_view.setAdapter(bin_items_adapter);
         bin_recycler_view.setLayoutManager(new LinearLayoutManager(getContext()));
-
 
         options = view.findViewById(R.id.btn_options);
         edit = view.findViewById(R.id.btn_edit);
@@ -168,7 +142,11 @@ public class Fragment_Items extends Fragment {
                             Intent data = result.getData();
                             Bin_Item item = new Bin_Item(data.getStringExtra("Item_name"),data.getStringExtra("Item_category"),data.getStringExtra("Item_qty"), data.getStringExtra("Item_weight"));
                             bin_items_adapter.addBin_item(item);
+                            bin_items_adapter.checkBinItemSize();
                         }
+                        else
+                            empty_bin.playAnimation();
+
                     }
                 });
 
@@ -176,7 +154,7 @@ public class Fragment_Items extends Fragment {
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), ActivityCreateItem.class);
+                Intent intent = new Intent(getContext(), ActivityItem.class);
                 intent.putExtra("Mode","create");
                 result_create_launcher.launch(intent);
             }
@@ -188,7 +166,12 @@ public class Fragment_Items extends Fragment {
                     @Override
                     public void onActivityResult(ActivityResult result) {
                         if (result.getResultCode() == Activity.RESULT_OK) {
+                            DatabaseHelper databaseHelper = new DatabaseHelper(getContext());
+                            bin_items_adapter.setBin_items(databaseHelper.getBinData());
+                            bin_items_adapter.notifyDataSetChanged();
                         }
+                        else
+                            empty_bin.playAnimation();
                     }
                 });
 
@@ -212,6 +195,7 @@ public class Fragment_Items extends Fragment {
             @Override
             public void onClick(View view) {
                 bin_items_adapter.removeSelectedItems();
+                bin_items_adapter.checkBinItemSize();
             }
         });
 
@@ -248,6 +232,7 @@ public class Fragment_Items extends Fragment {
             edit.startAnimation(toBottom);
             detection.startAnimation(toBottom);
             options.startAnimation(rotateClose);
+
         }
     }
 
@@ -263,6 +248,12 @@ public class Fragment_Items extends Fragment {
             detection.setClickable(false);
             delete.setClickable(false);
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        empty_bin.playAnimation();
     }
 
     @Override

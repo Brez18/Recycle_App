@@ -39,9 +39,9 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:text="25"
+                    android:textColor="@color/grey_green"
                     android:textSize="30sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/grey_green"/>
+                    />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -94,9 +94,8 @@
             android:layout_marginTop="10dp"
             android:layout_toEndOf="@+id/indicator_used"
             android:text="Used"
-            android:textColor="#99808080"
-            android:textSize="10sp"
-            android:textStyle="bold" />
+            android:textColor="@color/grey"
+            android:textSize="11sp" />
 
 
         <TextView
@@ -106,9 +105,9 @@
             android:layout_alignStart="@+id/txt_used"
             android:layout_alignBottom="@id/indicator_used"
             android:text="3 kg"
-            android:textColor="@color/grey"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+            android:textColor="#99808080"
+            android:textSize="13sp"
+            />
 
         <View
             android:id="@+id/indicator_free"
@@ -130,9 +129,9 @@
             android:layout_marginStart="25dp"
             android:layout_marginTop="10dp"
             android:text="Free"
-            android:textColor="#99808080"
-            android:textSize="10sp"
-            android:textStyle="bold" />
+            android:textColor="@color/grey"
+            android:textSize="11sp"
+            />
 
         <TextView
             android:id="@+id/txt_Free"
@@ -141,9 +140,8 @@
             android:layout_alignStart="@+id/txt_free"
             android:layout_alignBottom="@id/indicator_free"
             android:text="6 kg"
-            android:textColor="@color/grey"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+            android:textColor="#99808080"
+            android:textSize="13sp" />
 
     </RelativeLayout>
 

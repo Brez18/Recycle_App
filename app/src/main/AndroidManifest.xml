@@ -29,7 +29,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ActivityCreateItem"
+            android:name=".ActivityItem"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
@@ -41,7 +41,7 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityBin"
+            android:name=".ActivityMyBin"
             android:exported="false"
             android:screenOrientation="portrait" />
 

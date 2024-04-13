@@ -19,8 +19,9 @@
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/shimmer"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <include layout="@layout/shimmer_layout"/>
+            android:layout_height="wrap_content"
+            >
+            <include layout="@layout/shimmer_layout" />
         </com.facebook.shimmer.ShimmerFrameLayout>
 
     </androidx.cardview.widget.CardView>

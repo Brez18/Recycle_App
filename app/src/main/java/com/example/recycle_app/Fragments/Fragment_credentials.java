@@ -25,6 +25,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.recycle_app.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
 
@@ -52,22 +54,26 @@ public class Fragment_credentials extends Fragment {
         EditText edt_password = view.findViewById(R.id.editText_password);
         ImageView eye = view.findViewById(R.id.ic_eye);
 
-        eye.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(edt_password.getTransformationMethod() != null) {
-                    edt_password.setTransformationMethod(null);
-                    eye.setImageResource(R.drawable.login_ic_open_eye_foreground);
-                    edt_password.setSelection(edt_password.length());//to change focus of cursor to last element
-                }
-                else
-                {
-                    edt_password.setTransformationMethod(new PasswordTransformationMethod());
-                    eye.setImageResource(R.drawable.login_ic_close_eye_foreground);
-                    edt_password.setSelection(edt_password.length());//to change focus of cursor to last element
-                }
+        eye.setOnClickListener(view1 -> {
+            if(edt_password.getTransformationMethod() != null) {
+                edt_password.setTransformationMethod(null);
+                eye.setImageResource(R.drawable.login_ic_open_eye_foreground);
+                edt_password.setSelection(edt_password.length());//to change focus of cursor to last element
+            }
+            else
+            {
+                edt_password.setTransformationMethod(new PasswordTransformationMethod());
+                eye.setImageResource(R.drawable.login_ic_close_eye_foreground);
+                edt_password.setSelection(edt_password.length());//to change focus of cursor to last element
             }
         });
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user!=null)
+            user.delete();
+    }
 }

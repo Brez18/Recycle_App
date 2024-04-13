@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivityCreateItem"
+    tools:context=".ActivityItem"
     android:id="@+id/activity_createItem"
     android:background="@color/white">
 

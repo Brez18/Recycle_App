@@ -40,7 +40,7 @@
             android:textColor="#FFCEA2"/>
 
         <TextView
-            android:id="@+id/username"
+            android:id="@+id/displayName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/greet"
@@ -62,7 +62,7 @@
         <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@+id/progress_horizontal"
             android:layout_width="150dp"
-            android:layout_height="2dp"
+            android:layout_height="5dp"
             android:layout_alignTop="@+id/ic_carbon_footprint"
             android:layout_toEndOf="@+id/ic_carbon_footprint"
             android:layout_marginTop="15dp"

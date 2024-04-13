@@ -1,54 +1,45 @@
 package com.example.recycle_app.Fragments;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PixelFormat;
-import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
-import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 
-import android.transition.Slide;
-import android.transition.Transition;
-import android.transition.TransitionManager;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.animation.TranslateAnimation;
-import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.recycle_app.ActivityBin;
-import com.example.recycle_app.ActivityCreateItem;
-import com.example.recycle_app.My_Bin.Bin_Item;
+import com.example.recycle_app.ActivityMyBin;
+import com.example.recycle_app.Database.DatabaseHelper;
 import com.example.recycle_app.R;
+import com.example.recycle_app.Server.MyResponse;
+import com.example.recycle_app.Server.RetrofitCaller_Interface;
+import com.example.recycle_app.Server.Retrofit_Server;
+import com.example.recycle_app.Server.UserInfo;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.protobuf.Any;
 
+import org.apache.http.HttpResponse;
 
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.Objects;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class FragmentDashboard extends Fragment implements View.OnClickListener {
 
@@ -59,7 +50,7 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener 
         switch (view.getId()){
 
             case R.id.card_bin:
-                Intent bin_intent = new Intent(getContext(), ActivityBin.class);
+                Intent bin_intent = new Intent(getContext(), ActivityMyBin.class);
                 startActivity(bin_intent);
                 break;
         }
@@ -81,6 +72,18 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        TextView displayName = view.findViewById(R.id.displayName);
+
+        if(user !=null) {
+            Log.e("Tag",user.getEmail());
+            Log.e("Tag",user.getDisplayName());
+            Log.e("Tag",user.getPhoneNumber());
+            displayName.setText(user.getDisplayName());
+        }
+        else
+            displayName.setText("User");
 
         RelativeLayout card_reference = view.findViewById(R.id.card_container);
 
@@ -111,11 +114,46 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Your Bin Items have been submitted" , Toast.LENGTH_SHORT).show();
+
+                UserInfo userInfo = new UserInfo();
+                Thread wait_thread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        userInfo.collect(FragmentDashboard.this.getContext());
+                        while (!userInfo.getUpload()) {}
+                        send_to_server(userInfo);
+                    }
+                });
+                wait_thread.start();
             }
         });
 
+    }
 
+    void send_to_server(UserInfo userInfo)
+    {
+        Retrofit_Server retrofitServer = new Retrofit_Server();
+        Retrofit retroInstance = retrofitServer.getRetrofitInstance();
+        RetrofitCaller_Interface caller =retroInstance.create(RetrofitCaller_Interface.class);
 
+        Call<MyResponse> responseCall = caller.sendBinDataToSever(userInfo);
+
+        responseCall.enqueue(new Callback<MyResponse>() {
+            @Override
+            public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+                Log.e("Tag", String.valueOf(response.code()));
+                MyResponse res = response.body();
+                Log.e("Tag", res.message);
+
+                Toast.makeText(getContext(), "Your Bin Items have been submitted" , Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<MyResponse> call, Throwable t) {
+
+                Log.e("Tag", "Fail");
+                Toast.makeText(getContext(), "Something went wrong" , Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

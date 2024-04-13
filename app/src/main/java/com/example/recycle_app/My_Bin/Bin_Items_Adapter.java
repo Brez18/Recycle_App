@@ -1,6 +1,5 @@
 package com.example.recycle_app.My_Bin;
 
-import static androidx.activity.result.ActivityResultCallerKt.registerForActivityResult;
 
 import android.animation.ObjectAnimator;
 import android.content.Intent;
@@ -21,17 +20,22 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.recycle_app.ActivityCreateItem;
+import com.airbnb.lottie.LottieAnimationView;
+import com.example.recycle_app.ActivityItem;
+import com.example.recycle_app.Database.DatabaseHelper;
 import com.example.recycle_app.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Objects;
 
 public class Bin_Items_Adapter extends RecyclerView.Adapter<Bin_Items_Adapter.ViewHolder>{
 
-    private final ArrayList<Bin_Item> bin_items;
+    private DatabaseHelper dbHelper;
+    private ArrayList<Bin_Item> bin_items;
     private final RecyclerView recyclerView;
     private int selected = 0;
     private Animation zoomIn, zoomOut,remove;
@@ -39,7 +43,19 @@ public class Bin_Items_Adapter extends RecyclerView.Adapter<Bin_Items_Adapter.Vi
 
     private ActivityResultLauncher<Intent> resultLauncher;
 
-    private ArrayList<ViewHolder> selected_Items = new ArrayList<>();
+    private ArrayList<ViewHolder> selected_ViewHolder = new ArrayList<>();
+    private ArrayList<Integer> selected_BinItems_position = new ArrayList<>();
+    private LottieAnimationView empty_bin;
+    private TextView txt_no_items;
+
+    public void setEmpty_bin(LottieAnimationView empty_bin) {
+        this.empty_bin = empty_bin;
+    }
+
+    public void setTxt_no_items(TextView txt_no_items) {
+        this.txt_no_items = txt_no_items;
+    }
+
 
     private ArrayList<Integer> drawableList = new ArrayList<>(Arrays.asList(R.drawable.bin_item_color_light_blue,R.drawable.bin_item_color_light_green,
             R.drawable.bin_item_color_pale_yellow,R.drawable.bin_item_color_peach,R.drawable.bin_item_color_light_purple,R.drawable.bin_item_color_light_red,
@@ -57,6 +73,7 @@ public class Bin_Items_Adapter extends RecyclerView.Adapter<Bin_Items_Adapter.Vi
         this.bin_items = items;
         this.recyclerView = recyclerView;
         this.resultLauncher = resultLauncher;
+        dbHelper = new DatabaseHelper(recyclerView.getContext());
 
         setUpAnimations();
     }
@@ -64,9 +81,13 @@ public class Bin_Items_Adapter extends RecyclerView.Adapter<Bin_Items_Adapter.Vi
     public ArrayList<Bin_Item> getBin_items() {
         return bin_items;
     }
+    public void setBin_items(ArrayList<Bin_Item> items) {
+        this.bin_items = items;
+    }
+
 
     public int getSelected_ItemsCount() {
-        return selected_Items.size();
+        return selected_BinItems_position.size();
     }
 
 
@@ -124,9 +145,10 @@ public class Bin_Items_Adapter extends RecyclerView.Adapter<Bin_Items_Adapter.Vi
                     changeColor(Color.parseColor("#425C5A"), holder,100);
                     holder.remove.setVisibility(View.VISIBLE);
                     holder.remove.startAnimation(zoomIn);
-                    selected_Items.add(holder);
+                    selected_ViewHolder.add(holder);
+                    selected_BinItems_position.add(holder.getAdapterPosition());
                     selected++;
-                    changeDeleteAplha();
+                    changeDeleteAlpha();
                 }
                 else if(holder.selected)
                 {
@@ -134,13 +156,14 @@ public class Bin_Items_Adapter extends RecyclerView.Adapter<Bin_Items_Adapter.Vi
                     changeColor(Color.parseColor("#59808080"), holder,0);
                     holder.remove.startAnimation(zoomOut);
                     holder.remove.setVisibility(View.GONE);
-                    selected_Items.remove(holder);
+                    selected_ViewHolder.remove(holder);
+                    selected_BinItems_position.remove(Integer.valueOf(holder.getAdapterPosition()));
                     selected--;
-                    changeDeleteAplha();
+                    changeDeleteAlpha();
                 }
                 else{
 
-                    Intent edit_item = new Intent(recyclerView.getContext(), ActivityCreateItem.class);
+                    Intent edit_item = new Intent(recyclerView.getContext(), ActivityItem.class);
                     edit_item.putExtra("Mode", "edit");
                     edit_item.putExtra("ItemName",holder.item_name.getText().toString());
                     edit_item.putExtra("Qty",holder.qty.getText().toString());
@@ -160,9 +183,10 @@ public class Bin_Items_Adapter extends RecyclerView.Adapter<Bin_Items_Adapter.Vi
                     changeColor(Color.parseColor("#425C5A"), holder, 100);
                     holder.remove.setVisibility(View.VISIBLE);
                     holder.remove.startAnimation(zoomIn);
-                    selected_Items.add(holder);
+                    selected_ViewHolder.add(holder);
+                    selected_BinItems_position.add(holder.getAdapterPosition());
                     selected++;
-                    changeDeleteAplha();
+                    changeDeleteAlpha();
                 }
                 return true;
             }
@@ -192,6 +216,15 @@ public class Bin_Items_Adapter extends RecyclerView.Adapter<Bin_Items_Adapter.Vi
                 holder.item.startAnimation(remove);
                 bin_items.remove(actual_position);
                 notifyItemRemoved(actual_position);
+
+                checkBinItemSize();
+                dbHelper.deleteBinItem(holder.item_name.getText().toString());
+
+                String filepath = "/Images"+"/" + holder.item_name.getText().toString();
+                File dir = new File(recyclerView.getContext().getFilesDir(), filepath);
+
+                deleteDir(dir);
+
             }
         });
 
@@ -248,11 +281,18 @@ public class Bin_Items_Adapter extends RecyclerView.Adapter<Bin_Items_Adapter.Vi
     }
 
     public void removeSelectedItems() {
+
         ViewHolder holder;
+        Collections.sort(selected_BinItems_position);
+        File dir;
 
-        for (int i=0;i<selected_Items.size();i++) {
-            holder=selected_Items.get(i);
-            int actual_position=holder.getAdapterPosition();
+
+        for (int i = 0; i< selected_BinItems_position.size(); i++) {
+            holder= (ViewHolder) recyclerView.findViewHolderForAdapterPosition(selected_BinItems_position.get(i)-i);
+            int actual_position = holder.getAdapterPosition();
+            changeColor(Color.parseColor("#59808080"), holder,0);
+            holder.selected =  false;
+            holder.remove.setVisibility(View.GONE);
 
             if(actual_position == getItemCount()-1 && actual_position > 0)
             {
@@ -265,31 +305,34 @@ public class Bin_Items_Adapter extends RecyclerView.Adapter<Bin_Items_Adapter.Vi
                 View item = Objects.requireNonNull(recyclerView.findViewHolderForAdapterPosition(actual_position + 1)).itemView;
                 item.findViewById(R.id.line_up).setVisibility(View.GONE);
             }
-            holder.container.callOnClick();
-            holder.item.startAnimation(remove);
             bin_items.remove(actual_position);
+            holder.item.startAnimation(remove);
             notifyItemRemoved(actual_position);
+
+            dbHelper.deleteBinItem(holder.item_name.getText().toString());
+
+            String filepath = "/Images"+"/" + holder.item_name.getText().toString();
+            dir = new File(recyclerView.getContext().getFilesDir(), filepath);
+
+            deleteDir(dir);
+
         }
+        selected = 0;
+        selected_ViewHolder.clear();
+        selected_BinItems_position.clear();
+        changeDeleteAlpha();
+    }
 
-        for (int i=0;i<selected_Items.size();i++) {
-            holder=selected_Items.get(i);
-            int actual_position=holder.getAdapterPosition();
-
-            if(actual_position == getItemCount()-1 && actual_position > 0)
-            {
-                View item = Objects.requireNonNull(recyclerView.findViewHolderForAdapterPosition(actual_position - 1)).itemView;
-                item.findViewById(R.id.line_down).setVisibility(View.GONE);
-            }
-
-            if(actual_position == 0 && getItemCount()>1)
-            {
-                View item = Objects.requireNonNull(recyclerView.findViewHolderForAdapterPosition(actual_position + 1)).itemView;
-                item.findViewById(R.id.line_up).setVisibility(View.GONE);
-            }
-            holder.container.callOnClick();
-            holder.item.startAnimation(remove);
-            bin_items.remove(actual_position);
-            notifyItemRemoved(actual_position);
+    public void checkBinItemSize()
+    {
+        if (bin_items.size()==0) {
+            empty_bin.setVisibility(View.VISIBLE);
+            txt_no_items.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            empty_bin.setVisibility(View.INVISIBLE);
+            txt_no_items.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -318,12 +361,13 @@ public class Bin_Items_Adapter extends RecyclerView.Adapter<Bin_Items_Adapter.Vi
     public void unSelectItems()
     {
 
-        for (int i=0;i<selected_Items.size();i++)
-            selected_Items.get(i).container.callOnClick();
-        for (int i=0;i<selected_Items.size();i++)
-            selected_Items.get(i).container.callOnClick();
+        for (int i=0;i<selected_ViewHolder.size();i++)
+            selected_ViewHolder.get(i).container.callOnClick();
+        for (int i=0;i<selected_ViewHolder.size();i++)
+            selected_ViewHolder.get(i).container.callOnClick();
 
     }
+
 
     private void setUpAnimations()
     {
@@ -338,11 +382,29 @@ public class Bin_Items_Adapter extends RecyclerView.Adapter<Bin_Items_Adapter.Vi
         remove.setDuration(500);
     }
 
-    private void changeDeleteAplha(){
+    public void changeDeleteAlpha(){
         if(selected==0)
             delete_items_btn.setImageAlpha(110);
         else
             delete_items_btn.setImageAlpha(255);
     }
 
+    private boolean deleteDir(File dir) {
+
+        if (dir.isDirectory()) {
+            String[] children = dir.list();
+            assert children != null;
+            for (String child : children) {
+                boolean success = deleteDir(new File(dir, child));
+                if (!success) {
+                    return false;
+                }
+            }
+        }
+
+        // The directory is now empty so delete it
+        return dir.delete();
+    }
+
 }
+

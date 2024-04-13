@@ -7,12 +7,12 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.CycleInterpolator;
 import android.view.animation.TranslateAnimation;
@@ -20,23 +20,28 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.recycle_app.Database.APIDataReader;
-import com.example.recycle_app.Database.DatabaseHelper;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
 
-import org.json.JSONException;
+import java.io.Serial;
+
+
+//import com.google.firebase.auth.FirebaseUser;
 
 public class ActivityLogin extends AppCompatActivity implements View.OnClickListener{
 
-    EditText edt_name;
+    EditText edt_mail;
     EditText edt_password;
 
-    private DatabaseHelper db_helper = new DatabaseHelper();
+    FirebaseAuth auth = FirebaseAuth.getInstance();
 
     @SuppressLint("SetTextI18n")
-    public TranslateAnimation shakeError(int type_error) {
+    public TranslateAnimation shakeError() {
         TranslateAnimation shake = new TranslateAnimation(0, 10, 0, 0);
         TextView error_text = findViewById(R.id.text_error);
 
@@ -44,8 +49,6 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
         shake.setInterpolator(new CycleInterpolator(5));
 
         error_text.setVisibility(View.VISIBLE);
-        if(type_error == 1)
-            error_text.setText("Invalid Password");
 
         Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         v.vibrate(VibrationEffect.createOneShot(150, VibrationEffect.DEFAULT_AMPLITUDE));
@@ -55,36 +58,44 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View view) {
-        Intent intent;
-        int flag;
+
         switch (view.getId())
         {
             case R.id.LogIn:
-//                flag = db_helper.login(edt_name.getText().toString(), edt_password.getText().toString());
-                try {
-                    flag = APIDataReader.verifyData(edt_name.getText().toString().trim(), edt_password.getText().toString());
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
-                }
 
-                if(flag == -1) {
-                    findViewById(R.id.text_error).setVisibility(View.INVISIBLE);
-                    intent = new Intent(this , ActivityMain.class);
-                    startActivity(intent);
-                } else if (flag == 0) {
-                    edt_name.setText("");
-                    edt_password.setText("");
-                    edt_name.startAnimation(shakeError(0));
-                    edt_password.startAnimation(shakeError(0));
+                String email = edt_mail.getText().toString(),password = edt_password.getText().toString();
+                if(email.isEmpty() || password.isEmpty())
+                {
+                    edt_mail.startAnimation(shakeError());
+                    edt_password.startAnimation(shakeError());
                 }
-                else {//1
-                    edt_password.setText("");
-                    edt_password.startAnimation(shakeError(1));
+                else {
+                    ProgressBar circle = findViewById(R.id.progress_circle);
+                    circle.setVisibility(View.VISIBLE);
+
+
+                    auth.signInWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(task -> {
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    findViewById(R.id.text_error).setVisibility(View.INVISIBLE);
+                                    Intent intent = new Intent(ActivityLogin.this, ActivityMain.class);
+                                    startActivity(intent);
+                                    finish();
+                                } else {
+                                    // If sign in fails, display a message to the user.
+                                    edt_mail.setText("");
+                                    edt_password.setText("");
+                                    edt_mail.startAnimation(shakeError());
+                                    edt_password.startAnimation(shakeError());
+                                }
+                                circle.setVisibility(View.INVISIBLE);
+                            });
                 }
                 break;
 
             case R.id.createAcc:
-                intent = new Intent(this , ActivityAccountCreate.class);
+                Intent intent = new Intent(this , ActivityAccountCreate.class);
                 startActivity(intent);
                 break;
 
@@ -99,23 +110,23 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
         Button signIn = findViewById(R.id.LogIn);
         ImageView eye = findViewById(R.id.ic_eye);
         TextView create_acc = findViewById(R.id.createAcc);
-        edt_name = findViewById(R.id.editText_mail);
+        edt_mail = findViewById(R.id.editText_mail);
         edt_password = findViewById(R.id.editText_password);
 
-        TextWatcher(edt_name);
+        TextWatcher(edt_mail);
         TextWatcher(edt_password);
 
-        int SDK_INT = android.os.Build.VERSION.SDK_INT;
-        if (SDK_INT > 8)
-        {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-                    .permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-            //your codes here
-            APIDataReader.getData();
+//        Implement Log Out also
+        FirebaseUser currentUser = auth.getCurrentUser();
+        if(currentUser != null){
+            auth.signOut();
+//            Intent intent = new Intent(ActivityLogin.this, ActivityMain.class);
+//            startActivity(intent);
+//            finish();
         }
 
         signIn.setOnClickListener(this);
@@ -167,4 +178,10 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        TextView error_text = findViewById(R.id.text_error);
+        error_text.setVisibility(View.INVISIBLE);
+    }
 }

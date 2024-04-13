@@ -24,7 +24,6 @@ import antonkozyriatskyi.circularprogressindicator.CircularProgressIndicator;
 
 public class Fragment_Overview extends Fragment {
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

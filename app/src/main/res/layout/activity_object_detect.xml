@@ -80,22 +80,25 @@
         <RelativeLayout
             android:id="@+id/tooltip"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_alignParentBottom="true"
+            android:layout_height="25dp"
+            android:layout_alignBottom="@+id/img_camera"
             android:layout_centerHorizontal="true"
             android:background="@drawable/drawable_tooltip"
             android:backgroundTint="#80000000"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="40dp"
             android:visibility="invisible"
-            android:padding="5dp">
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:paddingStart="6dp"
+            android:paddingEnd="6dp">
 
             <TextView
+                android:id="@+id/txt_tooltip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:textSize="12sp"
-                android:text="Tap on a dot to inspect"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                android:textSize="12sp" />
 
         </RelativeLayout>
 
@@ -210,9 +213,39 @@
 
         </RelativeLayout>
 
-
     </HorizontalScrollView>
 
+
+    <View
+        android:id="@+id/dummy_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignTop="@id/img_container"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="100dp"
+        />
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_AddItem_Container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/dummy_view"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        />
+
+    <RelativeLayout
+        android:id="@+id/dimmed_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@id/fragment_AddItem_Container"
+        android:background="@color/dim_black"
+        android:visibility="gone"
+        android:clickable="true"/>
 
 </RelativeLayout>
 

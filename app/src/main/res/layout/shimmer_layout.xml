@@ -5,40 +5,74 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
-        <RelativeLayout
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentStart="true"
+            android:background="#ECECEC"
+            app:shapeAppearanceOverlay="@style/roundedImageView" />
+
+        <View
+            android:id="@+id/view1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="15dp">
+            android:layout_height="15dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@+id/image"
+            android:background="@drawable/ca_shape_squircle"
+            android:backgroundTint="#ECECEC" />
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/image"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:background="#ECECEC"
-                app:shapeAppearanceOverlay="@style/roundedImageView" />
+        <TextView
+            android:id="@+id/text_view1"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@+id/image"
+            android:textColor="@color/black"
+            android:textSize="23sp"
+            android:textStyle="bold" />
 
-            <View
-                android:id="@+id/view1"
+        <View
+            android:id="@+id/view2"
+            android:layout_width="80dp"
+            android:layout_height="15dp"
+            android:layout_below="@id/view1"
+            android:layout_alignStart="@id/view1"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/ca_shape_squircle"
+            android:backgroundTint="#ECECEC" />
+
+        <RelativeLayout
+            android:id="@+id/container_tag"
+            android:layout_width="65dp"
+            android:layout_height="20dp"
+            android:layout_below="@id/view1"
+            android:layout_alignStart="@id/view1"
+            android:layout_marginTop="23dp"
+            android:visibility="invisible"
+            android:background="@drawable/bin_shape_squircle">
+
+            <TextView
+                android:id="@+id/txt_tag"
                 android:layout_width="wrap_content"
-                android:layout_height="15dp"
-                android:layout_toEndOf="@+id/image"
-                android:layout_alignTop="@id/image"
-                android:layout_marginTop="5dp"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/ca_shape_squircle"
-                android:backgroundTint="#ECECEC" />
-
-            <View
-                android:layout_width="80dp"
-                android:layout_height="15dp"
-                android:layout_below="@id/view1"
-                android:layout_marginTop="10dp"
-                android:layout_alignStart="@id/view1"
-                android:background="@drawable/ca_shape_squircle"
-                android:backgroundTint="#ECECEC" />
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@color/grey_green"
+                android:textStyle="bold"
+                android:textSize="12sp"/>
 
         </RelativeLayout>
+
+
+    </RelativeLayout>
 
 </RelativeLayout>
