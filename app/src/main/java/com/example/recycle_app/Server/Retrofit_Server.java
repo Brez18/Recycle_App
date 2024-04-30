@@ -7,8 +7,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Retrofit_Server {
-    private final String localhost = "http://192.168.129.49:8000/";
-    //private final String serverURL;
+    private final String serverURL="https://valley.pythonanywhere.com/";
     private final Retrofit retrofit;
 
     public Retrofit_Server()
@@ -19,7 +18,7 @@ public class Retrofit_Server {
                 .build();
 
         this.retrofit = new Retrofit.Builder()
-                .baseUrl(localhost)
+                .baseUrl(serverURL)
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

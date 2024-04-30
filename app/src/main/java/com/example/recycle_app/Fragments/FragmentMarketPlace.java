@@ -41,6 +41,6 @@ public class FragmentMarketPlace extends Fragment {
         webView.getSettings().setLoadWithOverviewMode(true);
         webView.getSettings().setUseWideViewPort(true);
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.loadUrl("https://multimart-react-ecommerce.vercel.app");
+        webView.loadUrl("https://market-place-recycle-it.vercel.app/");
     }
 }

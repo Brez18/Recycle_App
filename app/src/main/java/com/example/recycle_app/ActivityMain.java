@@ -2,6 +2,7 @@ package com.example.recycle_app;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -62,26 +63,25 @@ public class ActivityMain extends AppCompatActivity{
 
         OpenFragment(new FragmentDashboard());
 
-        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int itemID = item.getItemId();
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            int itemID = item.getItemId();
 
-                switch (itemID)
-                {
-                    case R.id.ic_dashboard:
-                        OpenFragment(new FragmentDashboard());
-                        break;
-                    case R.id.ic_market:
-                        OpenFragment(new FragmentMarketPlace());
-                        break;
-                    case R.id.ic_maps:
-                        OpenFragment(new FragmentMaps());
-                        break;
-
-                }
-                return true;
+            switch (itemID)
+            {
+                case R.id.ic_dashboard:
+                    bottomNavigationView.setBackground(AppCompatResources.getDrawable(this,R.drawable.btm_nav_bar_background));
+                    OpenFragment(new FragmentDashboard());
+                    break;
+                case R.id.ic_market:
+                    bottomNavigationView.setBackground(AppCompatResources.getDrawable(this,R.color.grey_green));
+                    OpenFragment(new FragmentMarketPlace());
+                    break;
+                case R.id.ic_maps:
+                    bottomNavigationView.setBackground(AppCompatResources.getDrawable(this,R.drawable.btm_nav_bar_background));
+                    OpenFragment(new FragmentMaps());
+                    break;
             }
+            return true;
         });
 
     }
